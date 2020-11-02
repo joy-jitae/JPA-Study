@@ -1,12 +1,15 @@
 package jpabook.start;
 
-import javax.persistence.*;  //**
+import lombok.*;
 
-/**
- * User: HolyEyE
- * Date: 13. 5. 24. Time: 오후 7:43
- */
+import javax.persistence.*;
+import java.util.Date;
+
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Table(name="MEMBER")
 public class Member {
 
@@ -14,32 +17,23 @@ public class Member {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false, length = 10)
     private String username;
 
     private Integer age;
 
-    public String getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
-    public String getUsername() {
-        return username;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Lob
+    private String description;
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+    @Transient
+    private String temp;
 }
